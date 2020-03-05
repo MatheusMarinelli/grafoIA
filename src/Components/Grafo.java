@@ -1,9 +1,12 @@
 package Components;
 
+import Enums.Sentido;
+
 public class Grafo {
     private Vertice[][] grafo;
     private final int linhas = 3;
     private int colunas;
+    private Double matrizAdjacencia[][];
 
     public Grafo(int colunas) {
         this.colunas = colunas;
@@ -39,7 +42,6 @@ public class Grafo {
 
         for (int i=0;i<linhas;i++) {
             for (int j=0;j<colunas;j++) {
-                clearScreen();
                 System.out.print(grafo[i][j]);
 
 
@@ -57,14 +59,14 @@ public class Grafo {
     }
 
     private void exibirMenu() {
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println("Vertical para cima              [1]");
+        System.out.println("Vertical para baixo             [2]");
+        System.out.println("Horizontal para a direita       [3]");
+        System.out.println("Horizontal para a esquerda      [4]");
+        System.out.println("Diagonal esquerda para baixo    [5]");
+        System.out.println("Diagonal direita para baixo     [6]");
+        System.out.println("Diagonal esquerda para cima     [7]");
+        System.out.println("Diagonal direita para cima      [8]");
     }
 
 
