@@ -3,6 +3,7 @@ package Components;
 import Enums.Peso;
 import Enums.Sentido;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Grafo {
@@ -10,10 +11,12 @@ public class Grafo {
     private final int linhas = 3;
     private int colunas;
     private Double matrizAdjacencia[][];
+    private ArrayList<Aresta> arestasGrafo;
 
     public Grafo(int colunas) {
         this.colunas = colunas;
         grafo = criarGrafo();
+        arestasGrafo = new ArrayList<>();
     }
 
     /**
@@ -90,7 +93,8 @@ public class Grafo {
     private boolean checkOption(Vertice v, Sentido sentido) {
         //testando a HORIZONTAL DIREITA
         if (sentido == Sentido.HORIZONTAL_DIREITA && grafo[v.getLinha()][v.getColuna() + 1] != null) {
-            //inserir na matriz de adjacencia
+            arestasGrafo.add(new Aresta(v,grafo[v.getLinha()][v.getColuna() + 1],sentido,Peso.UM));
+            //add na matriz de adjacencia
         }
 
         //testando a HORIZONTAL ESQUERDA
@@ -109,6 +113,23 @@ public class Grafo {
         }
 
         //testando a DIAGONAL BAIXO DIREITA
+        if (sentido == Sentido.DIAGONAL_BAIXO_DIREITA && grafo[v.getLinha() + 1][v.getColuna() + 1] != null) {
+
+        }
+
+        //testando a DIAGONAL BAIXO ESQUERDA
+        if (sentido == Sentido.DIAGONAL_BAIXO_ESQUERDA && grafo[v.getLinha() + 1][v.getColuna() - 1] != null) {
+
+        }
+
+        //testando a DIAGONAL CIMA DIREITA
+        if (sentido == Sentido.DIAGONAL_CIMA_DIREITA && grafo[v.getLinha() - 1][v.getColuna() + 1] != null) {
+
+        }
+        //testando a DIAGONAL CIMA ESQUERDA
+        if (sentido == Sentido.DIAGONAL_CIMA_ESQUERDA && grafo[v.getLinha() - 1][v.getColuna() - 1] != null) {
+
+        }
 
         return false;
     }

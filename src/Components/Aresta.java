@@ -9,10 +9,11 @@ public class Aresta {
     private Vertice x,y;
     private Sentido sentido;
 
-    public Aresta(Vertice x, Vertice y, Sentido sentido) {
+    public Aresta(Vertice x, Vertice y, Sentido sentido, Peso peso) {
         this.x = x;
         this.y = y;
         this.sentido = sentido;
+        this.peso = peso;
     }
 
     public Vertice getX() {
