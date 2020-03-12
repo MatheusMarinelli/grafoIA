@@ -16,6 +16,8 @@ public class Aresta {
         this.peso = peso;
     }
 
+    public Aresta(){}
+
     public Vertice getX() {
         return x;
     }
@@ -34,5 +36,28 @@ public class Aresta {
 
     public boolean validarAresta() {
         return true;
+    }
+
+    public Sentido getSentido(int opcao) {
+        switch (opcao) {
+            case 1:
+                return Sentido.VERTICAL_CIMA;
+            case 2:
+                return Sentido.VERTICAL_BAIXO;
+            case 3:
+                return Sentido.HORIZONTAL_DIREITA;
+            case 4:
+                return Sentido.HORIZONTAL_ESQUERDA;
+            case 5:
+                return Sentido.DIAGONAL_BAIXO_ESQUERDA;
+            case 6:
+                return Sentido.DIAGONAL_BAIXO_DIREITA;
+            case 7:
+                return Sentido.DIAGONAL_CIMA_ESQUERDA;
+            case 8:
+                return Sentido.DIAGONAL_CIMA_DIREITA;
+            default:
+                return null;
+        }
     }
 }

@@ -5,11 +5,14 @@ public class Vertice {
     private int linha;
     private int coluna;
     private static int indiceId = 0;
+    private int idVertice;
+    private static int rgVertice = 0; //identifica o vertice p/ a matriz de adjacencia
 
     public Vertice(int linha, int coluna) {
         id = gerarId();
         this.linha = linha;
         this.coluna = coluna;
+        idVertice = gerarNumeroVertice();
     }
 
 
@@ -37,8 +40,17 @@ public class Vertice {
         this.coluna = coluna;
     }
 
+    public int getIdVertice() {
+        return idVertice;
+    }
+
     private char gerarId() {
         indiceId++;
         return (char) (64+indiceId);
     }
+
+    private int gerarNumeroVertice() {
+        return rgVertice++;
+    }
+
 }

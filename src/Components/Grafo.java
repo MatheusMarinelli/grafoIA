@@ -3,6 +3,7 @@ package Components;
 import Enums.Peso;
 import Enums.Sentido;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class Grafo {
         this.colunas = colunas;
         grafo = criarGrafo();
         arestasGrafo = new ArrayList<>();
+        matrizAdjacencia = new Double[3*colunas][3*colunas];
     }
 
     /**
@@ -46,32 +48,29 @@ public class Grafo {
 
     public void preencherArestas() {
         exibirMenu();
+        Scanner sc = new Scanner(System.in);
         for (int i=0;i<linhas;i++) {
             for (int j=0;j<colunas;j++) {
 //                clearScreen();
-                exibirMenu();
-                System.out.print("Aresta " + grafo[i][j].getId());
+
+                System.out.print("Aresta " + grafo[i][j].getId() + "\n");
 
 
                 int opcao;
+
                 do { // solicitando uma ou mais direções para criação de arestas
-                    Scanner sc = new Scanner(System.in);
-                    Sentido s = null;
+
                     System.out.print("Digite uma das opções acima: ");
                     opcao = sc.nextInt();
 
-                    if (checkOption(grafo[i][j],s.getSentido(opcao))) {
-
+                    if (opcao != 0) {
+                        checkOption(grafo[i][j],new Aresta().getSentido(opcao));
                     }
-
-
-                    sc.close();
                 } while (opcao != 0);
-
-
             }
         }
-
+        sc.close();
+        completarMatrizAdjacencia();
     }
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -90,49 +89,89 @@ public class Grafo {
         System.out.println("Diagonal direita para cima      [8]");
     }
 
-    private boolean checkOption(Vertice v, Sentido sentido) {
-        //testando a HORIZONTAL DIREITA
-        if (sentido == Sentido.HORIZONTAL_DIREITA && grafo[v.getLinha()][v.getColuna() + 1] != null) {
-            arestasGrafo.add(new Aresta(v,grafo[v.getLinha()][v.getColuna() + 1],sentido,Peso.UM));
-            //add na matriz de adjacencia
+    private void checkOption(Vertice v, Sentido sentido) {
+        try {
+
+            //testando a HORIZONTAL DIREITA
+            if (sentido == Sentido.HORIZONTAL_DIREITA && grafo[v.getLinha()][v.getColuna() + 1] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha()][v.getColuna() + 1],sentido,Peso.UM));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()] = Peso.UM.getValor();
+                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+            }
+
+            //testando a HORIZONTAL ESQUERDA
+            if (sentido == Sentido.HORIZONTAL_ESQUERDA && grafo[v.getLinha()][v.getColuna() - 1] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha()][v.getColuna() - 1],sentido,Peso.UM));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()] = Peso.UM.getValor();
+                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+            }
+
+            //testando a VERTICAL CIMA
+            if (sentido == Sentido.VERTICAL_CIMA && grafo[v.getLinha() - 1][v.getColuna()] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() - 1][v.getColuna()],sentido,Peso.UM));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
+                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+            }
+
+            //testando a VERTICAL BAIXO
+            if (sentido == Sentido.VERTICAL_BAIXO && grafo[v.getLinha() + 1][v.getColuna()] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() + 1][v.getColuna()],sentido,Peso.UM));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
+                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+            }
+
+            //testando a DIAGONAL BAIXO DIREITA
+            if (sentido == Sentido.DIAGONAL_BAIXO_DIREITA && grafo[v.getLinha() + 1][v.getColuna() + 1] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() + 1][v.getColuna() + 1],sentido,Peso.DOIS));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
+                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+            }
+
+            //testando a DIAGONAL BAIXO ESQUERDA
+            if (sentido == Sentido.DIAGONAL_BAIXO_ESQUERDA && grafo[v.getLinha() + 1][v.getColuna() - 1] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() + 1][v.getColuna() - 1],sentido,Peso.DOIS));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
+                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+            }
+
+            //testando a DIAGONAL CIMA DIREITA
+            if (sentido == Sentido.DIAGONAL_CIMA_DIREITA && grafo[v.getLinha() - 1][v.getColuna() + 1] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() - 1][v.getColuna() + 1],sentido,Peso.DOIS));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
+                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+            }
+
+            //testando a DIAGONAL CIMA ESQUERDA
+            if (sentido == Sentido.DIAGONAL_CIMA_ESQUERDA && grafo[v.getLinha() - 1][v.getColuna() - 1] != null) {
+                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() - 1][v.getColuna() - 1],sentido,Peso.DOIS));
+                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
+                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+            }
+        } catch (Exception e) {
+            System.out.println("Não é possível inserir uma aresta!!!");
         }
-
-        //testando a HORIZONTAL ESQUERDA
-        if (sentido == Sentido.HORIZONTAL_ESQUERDA && grafo[v.getLinha()][v.getColuna() - 1] != null) {
-
-        }
-
-        //testando a VERTICAL CIMA
-        if (sentido == Sentido.VERTICAL_CIMA && grafo[v.getLinha() - 1][v.getColuna()] != null) {
-
-        }
-
-        //testando a VERTICAL BAIXO
-        if (sentido == Sentido.VERTICAL_BAIXO && grafo[v.getLinha() + 1][v.getColuna()] != null) {
-
-        }
-
-        //testando a DIAGONAL BAIXO DIREITA
-        if (sentido == Sentido.DIAGONAL_BAIXO_DIREITA && grafo[v.getLinha() + 1][v.getColuna() + 1] != null) {
-
-        }
-
-        //testando a DIAGONAL BAIXO ESQUERDA
-        if (sentido == Sentido.DIAGONAL_BAIXO_ESQUERDA && grafo[v.getLinha() + 1][v.getColuna() - 1] != null) {
-
-        }
-
-        //testando a DIAGONAL CIMA DIREITA
-        if (sentido == Sentido.DIAGONAL_CIMA_DIREITA && grafo[v.getLinha() - 1][v.getColuna() + 1] != null) {
-
-        }
-        //testando a DIAGONAL CIMA ESQUERDA
-        if (sentido == Sentido.DIAGONAL_CIMA_ESQUERDA && grafo[v.getLinha() - 1][v.getColuna() - 1] != null) {
-
-        }
-
-        return false;
     }
 
+    public void exibirMatrizAdjacencia() {
+//        DecimalFormat df = new DecimalFormat("#.##");
+        int t = linhas * colunas;
+        for (int i = 0;i<t;i++) {
+            for (int j=0;j<t;j++) {
+//                String peso = df.format(matrizAdjacencia[i][j]);
+//                System.out.print(peso + " ");
+                System.out.print(matrizAdjacencia[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 
+    private void completarMatrizAdjacencia() {
+        int t = linhas * colunas;
+        for (int i=0;i<t;i++) {
+            for (int j=0;j<t;j++) {
+                if (matrizAdjacencia[i][j] == null)
+                    matrizAdjacencia[i][j] = 0.0;
+            }
+        }
+    }
 }

@@ -20,6 +20,8 @@ public class Main {
         System.out.println("Preencha as arestas do grafo...\n");
         g.preencherArestas();
 
+        g.exibirMatrizAdjacencia();
+
         sc.close();
     }
 }
