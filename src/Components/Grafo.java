@@ -7,6 +7,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * Classe Responsável pelo GRAFO
+ */
 public class Grafo {
     private Vertice[][] grafo;
     private final int linhas = 3;
@@ -14,6 +18,10 @@ public class Grafo {
     private Double matrizAdjacencia[][];
     private ArrayList<Aresta> arestasGrafo;
 
+    /**
+     * CRIA UM NOVO GRAFO
+     * @param colunas quantidade de colunas (2 a 6)
+     */
     public Grafo(int colunas) {
         this.colunas = colunas;
         grafo = criarGrafo();
@@ -23,7 +31,7 @@ public class Grafo {
 
     /**
      * Cria o Grafo
-     * @return retorna os vértcies de um grafo
+     * @return retorna o grafo (matriz de vértices)
      */
     private Vertice[][] criarGrafo() {
         Vertice[][] aux = new Vertice[linhas][colunas];
@@ -37,6 +45,9 @@ public class Grafo {
         return aux;
     }
 
+    /**
+     * EXIBE O GRAFO
+     */
     public void mostrarGrafo() {
         for (int i=0; i<linhas;i++) {
             for (int j=0;j<colunas;j++) {
@@ -46,37 +57,47 @@ public class Grafo {
         }
     }
 
+    /**
+     * MÉTODO QUE EFETUA O PREENCHIMENTO DAS ARESTAS
+     * DENTRO DO GRAFO
+     */
     public void preencherArestas() {
         exibirMenu();
         Scanner sc = new Scanner(System.in);
+
+        //PERCORRENDO TODOS OS VÉRTICES DO GRAFO
         for (int i=0;i<linhas;i++) {
             for (int j=0;j<colunas;j++) {
 //                clearScreen();
 
                 System.out.print("Aresta " + grafo[i][j].getId() + "\n");
 
-
-                int opcao;
-
+                int opcao; //opção de inserção de uma nova aresta baseado no ID da ENUM Sentido
                 do { // solicitando uma ou mais direções para criação de arestas
 
                     System.out.print("Digite uma das opções acima: ");
                     opcao = sc.nextInt();
 
                     if (opcao != 0) {
+                        //VERIFICANDO SE É POSSÍVEL INSERIR A ARESTA
                         checkOption(grafo[i][j],new Aresta().getSentido(opcao));
                     }
-                } while (opcao != 0);
+                } while (opcao != 0); // SE 0 VAI PARA O PRÓXIMO VÉRTICE
             }
         }
         sc.close();
         completarMatrizAdjacencia();
     }
+
+
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
+    /**
+     * MENU COM AS OPÇÕES DE INSERÇÃO DE ARESTA
+     */
     private void exibirMenu() {
         System.out.println("Não inserir arestas no vértice  [0]");
         System.out.println("Vertical para cima              [1]");
@@ -89,6 +110,13 @@ public class Grafo {
         System.out.println("Diagonal direita para cima      [8]");
     }
 
+    /**
+     * VALIDA SE OPÇÃO DO USUÁRIO É VÁLIDA
+     * PARA INSERIR UM NOVA ARESTA
+     *
+     * @param v vértice em que o usuário está
+     * @param sentido sentido de inserção da aresta
+     */
     private void checkOption(Vertice v, Sentido sentido) {
         try {
 
@@ -152,6 +180,9 @@ public class Grafo {
         }
     }
 
+    /**
+     * Exibe a matriz de adjacência
+     */
     public void exibirMatrizAdjacencia() {
 //        DecimalFormat df = new DecimalFormat("#.##");
         int t = linhas * colunas;
@@ -165,6 +196,11 @@ public class Grafo {
         }
     }
 
+    /**
+     * APÓS O USUÁRIO FINALIZAR A INSERÇÃO DAS ARESTAS, ESSE MÉTODO
+     * PEGARÁ AS POSIÇÕES NULL DA MATRIZ (NÃO TEM ARESTA NA POSIÇÃO XY)
+     * E SUBSTITUIRÁ PELO VALOR 0.0 (INDICANDO QUE NÃO HÁ ARESTA NA POSIÇÃO XY)
+     */
     private void completarMatrizAdjacencia() {
         int t = linhas * colunas;
         for (int i=0;i<t;i++) {

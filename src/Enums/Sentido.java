@@ -1,5 +1,9 @@
 package Enums;
 
+/**
+ * REPRESENTA O SENTIDO DAS ARESTAS COM UM IDENTIFICADOR
+ * DE SENTIDO (ID)
+ */
 public enum Sentido {
     VERTICAL_CIMA (1),
     VERTICAL_BAIXO (2),

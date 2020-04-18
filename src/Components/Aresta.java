@@ -38,6 +38,13 @@ public class Aresta {
         return true;
     }
 
+    /**
+     * PEGA O SENTIDO DA ARESTA QUE SE DESEJA INSERIR
+     * BASEADO NO PARÂMETRO
+     *
+     * @param opcao sentido da aresta a ser inserida
+     * @return retorna o sentido que se deseja inserir a aresta
+     */
     public Sentido getSentido(int opcao) {
         switch (opcao) {
             case 1:

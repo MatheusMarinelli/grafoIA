@@ -44,11 +44,22 @@ public class Vertice {
         return idVertice;
     }
 
+    /**
+     * IDENTIFICADOR DO VÉRTICE
+     * (A,B,C,D,E...)
+     * @return retorna uma letra identificando o vértice
+     */
     private char gerarId() {
         indiceId++;
         return (char) (64+indiceId);
     }
 
+    /**
+     * REGISTRA O ID NUMÉRICO PARA O VÉRTICE
+     * SER MANIPULADO NA MATRIZ DE ADJACÊNCIA
+     *
+     * @return retorna o ID numérico do vértice
+     */
     private int gerarNumeroVertice() {
         return rgVertice++;
     }
