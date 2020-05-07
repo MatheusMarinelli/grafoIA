@@ -3,6 +3,8 @@ package Components;
 import Enums.Peso;
 import Enums.Sentido;
 
+import java.util.HashSet;
+
 public class Aresta {
 
     private Peso peso;
@@ -14,6 +16,11 @@ public class Aresta {
         this.y = y;
         this.sentido = sentido;
         this.peso = peso;
+    }
+
+    public Aresta(Vertice x, Vertice y){
+        this.x = x;
+        this.y = y;
     }
 
     public Aresta(){}
@@ -66,5 +73,38 @@ public class Aresta {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Verifica se existe a aresta oposta a do parâmetro
+     * Ex: deseja-se inserir a aresta D-C, o método verificará se existe C-D
+     *
+     * @param arestas  todas as arestas inseridas
+     * @param novaAresta aresta que se deseja inserir
+     * @return true (aresta já existe), false (aresta não existe)
+     */
+    public static boolean arestaExiste(HashSet<Aresta> arestas, Aresta novaAresta) {
+
+        if (arestas.contains(novaAresta))
+            return true;
+
+        Aresta aux = new Aresta(novaAresta.getY(),novaAresta.getX());
+
+        for (Aresta a : arestas) {
+            if (a.x == aux.x && a.y == aux.y)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean posicaoVerticesValido(Vertice x, Vertice y) {
+        return x.getIdVertice() < y.getIdVertice();
+    }
+
+    public Aresta inverterVertices(Aresta aresta) {
+        Vertice aux = aresta.x;
+        aresta.x = aresta.y;
+        aresta.y = aux;
+        return aresta;
     }
 }

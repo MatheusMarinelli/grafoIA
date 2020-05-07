@@ -5,6 +5,7 @@ import Enums.Sentido;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 
@@ -16,7 +17,7 @@ public class Grafo {
     private final int linhas = 3;
     private int colunas;
     private Double matrizAdjacencia[][];
-    private ArrayList<Aresta> arestasGrafo;
+    private HashSet<Aresta> arestasGrafo;
 
     /**
      * CRIA UM NOVO GRAFO
@@ -25,7 +26,7 @@ public class Grafo {
     public Grafo(int colunas) {
         this.colunas = colunas;
         grafo = criarGrafo();
-        arestasGrafo = new ArrayList<>();
+        arestasGrafo = new HashSet<>();
         matrizAdjacencia = new Double[3*colunas][3*colunas];
     }
 
@@ -86,7 +87,10 @@ public class Grafo {
             }
         }
         sc.close();
-        completarMatrizAdjacencia();
+        for (Aresta a: arestasGrafo) {
+            System.out.println(a.getX().getId() + "//" + a.getY().getId());
+        }
+        //completarMatrizAdjacencia();
     }
 
 
@@ -118,62 +122,104 @@ public class Grafo {
      * @param sentido sentido de inserção da aresta
      */
     private void checkOption(Vertice v, Sentido sentido) {
+        Aresta novaAresta;
         try {
 
             //testando a HORIZONTAL DIREITA
             if (sentido == Sentido.HORIZONTAL_DIREITA && grafo[v.getLinha()][v.getColuna() + 1] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha()][v.getColuna() + 1],sentido,Peso.UM));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()] = Peso.UM.getValor();
-                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha()][v.getColuna() + 1],sentido,Peso.UM);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+                }
+
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()] = Peso.UM.getValor();
+//                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
             }
 
             //testando a HORIZONTAL ESQUERDA
             if (sentido == Sentido.HORIZONTAL_ESQUERDA && grafo[v.getLinha()][v.getColuna() - 1] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha()][v.getColuna() - 1],sentido,Peso.UM));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()] = Peso.UM.getValor();
-                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha()][v.getColuna() - 1],sentido,Peso.UM);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()] = Peso.UM.getValor();
+//                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+                    }
             }
 
             //testando a VERTICAL CIMA
             if (sentido == Sentido.VERTICAL_CIMA && grafo[v.getLinha() - 1][v.getColuna()] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() - 1][v.getColuna()],sentido,Peso.UM));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
-                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha() - 1][v.getColuna()],sentido,Peso.UM);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+                }
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
+//                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
             }
 
             //testando a VERTICAL BAIXO
             if (sentido == Sentido.VERTICAL_BAIXO && grafo[v.getLinha() + 1][v.getColuna()] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() + 1][v.getColuna()],sentido,Peso.UM));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
-                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha() + 1][v.getColuna()],sentido,Peso.UM);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+                }
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
+//                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
             }
 
             //testando a DIAGONAL BAIXO DIREITA
             if (sentido == Sentido.DIAGONAL_BAIXO_DIREITA && grafo[v.getLinha() + 1][v.getColuna() + 1] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() + 1][v.getColuna() + 1],sentido,Peso.DOIS));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
-                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha() + 1][v.getColuna() + 1],sentido,Peso.DOIS);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+                }
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
+//                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
 
             //testando a DIAGONAL BAIXO ESQUERDA
             if (sentido == Sentido.DIAGONAL_BAIXO_ESQUERDA && grafo[v.getLinha() + 1][v.getColuna() - 1] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() + 1][v.getColuna() - 1],sentido,Peso.DOIS));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
-                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha() + 1][v.getColuna() - 1],sentido,Peso.DOIS);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+                }
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
+//                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
 
             //testando a DIAGONAL CIMA DIREITA
             if (sentido == Sentido.DIAGONAL_CIMA_DIREITA && grafo[v.getLinha() - 1][v.getColuna() + 1] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() - 1][v.getColuna() + 1],sentido,Peso.DOIS));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
-                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha() - 1][v.getColuna() + 1],sentido,Peso.DOIS);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+                }
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
+//                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
 
             //testando a DIAGONAL CIMA ESQUERDA
             if (sentido == Sentido.DIAGONAL_CIMA_ESQUERDA && grafo[v.getLinha() - 1][v.getColuna() - 1] != null) {
-                arestasGrafo.add(new Aresta(v,grafo[v.getLinha() - 1][v.getColuna() - 1],sentido,Peso.DOIS));
-                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
-                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
+                novaAresta = new Aresta(v,grafo[v.getLinha() - 1][v.getColuna() - 1],sentido,Peso.DOIS);
+                if (!Aresta.arestaExiste(arestasGrafo,novaAresta)) { // testa se a aresta existe
+                    if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
+                        novaAresta = novaAresta.inverterVertices(novaAresta);
+                    arestasGrafo.add(novaAresta);
+                }
+//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
+//                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
         } catch (Exception e) {
             System.out.println("Não é possível inserir uma aresta!!!");
