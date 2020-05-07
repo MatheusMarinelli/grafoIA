@@ -3,9 +3,9 @@ package Components;
 import Enums.Peso;
 import Enums.Sentido;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -16,7 +16,7 @@ public class Grafo {
     private Vertice[][] grafo;
     private final int linhas = 3;
     private int colunas;
-    private Double matrizAdjacencia[][];
+    private List<Integer[]> matrizAdjacencia;
     private HashSet<Aresta> arestasGrafo;
 
     /**
@@ -27,7 +27,7 @@ public class Grafo {
         this.colunas = colunas;
         grafo = criarGrafo();
         arestasGrafo = new HashSet<>();
-        matrizAdjacencia = new Double[3*colunas][3*colunas];
+        newMatrizAdjacencia();
     }
 
     /**
@@ -55,6 +55,17 @@ public class Grafo {
                 System.out.print(grafo[i][j].getId() + " ");
             }
             System.out.println();
+        }
+    }
+
+    /**
+     * Cria a matriz de adjacência utilizando vetores
+     * Matriz de adjacência é uma lista de vetores
+     */
+    private void newMatrizAdjacencia() {
+        matrizAdjacencia = new ArrayList<>();
+        for (int i = (linhas*colunas)-1;i >= 1;i--){
+             matrizAdjacencia.add(new Integer[i]);
         }
     }
 
@@ -87,9 +98,10 @@ public class Grafo {
             }
         }
         sc.close();
-        for (Aresta a: arestasGrafo) {
-            System.out.println(a.getX().getId() + "//" + a.getY().getId());
-        }
+
+//        for (Aresta a: arestasGrafo) { // mostrando as arestas
+//            System.out.println(a.getX().getId() + "//" + a.getY().getId());
+//        }
         //completarMatrizAdjacencia();
     }
 
@@ -231,29 +243,14 @@ public class Grafo {
      */
     public void exibirMatrizAdjacencia() {
 //        DecimalFormat df = new DecimalFormat("#.##");
-        int t = linhas * colunas;
+        int t = linhas * colunas - 1;
         for (int i = 0;i<t;i++) {
             for (int j=0;j<t;j++) {
 //                String peso = df.format(matrizAdjacencia[i][j]);
 //                System.out.print(peso + " ");
-                System.out.print(matrizAdjacencia[i][j] + " ");
+                System.out.print(matrizAdjacencia.get(i)[j] + " ");
             }
             System.out.println();
-        }
-    }
-
-    /**
-     * APÓS O USUÁRIO FINALIZAR A INSERÇÃO DAS ARESTAS, ESSE MÉTODO
-     * PEGARÁ AS POSIÇÕES NULL DA MATRIZ (NÃO TEM ARESTA NA POSIÇÃO XY)
-     * E SUBSTITUIRÁ PELO VALOR 0.0 (INDICANDO QUE NÃO HÁ ARESTA NA POSIÇÃO XY)
-     */
-    private void completarMatrizAdjacencia() {
-        int t = linhas * colunas;
-        for (int i=0;i<t;i++) {
-            for (int j=0;j<t;j++) {
-                if (matrizAdjacencia[i][j] == null)
-                    matrizAdjacencia[i][j] = 0.0;
-            }
         }
     }
 }
