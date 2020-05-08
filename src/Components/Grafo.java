@@ -17,7 +17,7 @@ public class Grafo {
     private final int linhas = 3;
     private int colunas;
     private List<Integer[]> matrizAdjacencia;
-    private HashSet<Aresta> arestasGrafo;
+    private ArrayList<Aresta> arestasGrafo;
 
     /**
      * CRIA UM NOVO GRAFO
@@ -26,7 +26,7 @@ public class Grafo {
     public Grafo(int colunas) {
         this.colunas = colunas;
         grafo = criarGrafo();
-        arestasGrafo = new HashSet<>();
+        arestasGrafo = new ArrayList<>();
         newMatrizAdjacencia();
     }
 
@@ -99,9 +99,9 @@ public class Grafo {
         }
         sc.close();
 
-//        for (Aresta a: arestasGrafo) { // mostrando as arestas
-//            System.out.println(a.getX().getId() + "//" + a.getY().getId());
-//        }
+        for (Aresta a: arestasGrafo) { // mostrando as arestas
+            System.out.println(a.getX().getId() + "//" + a.getY().getId());
+        }
         //completarMatrizAdjacencia();
     }
 

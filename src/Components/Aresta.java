@@ -3,6 +3,7 @@ package Components;
 import Enums.Peso;
 import Enums.Sentido;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Aresta {
@@ -83,10 +84,12 @@ public class Aresta {
      * @param novaAresta aresta que se deseja inserir
      * @return true (aresta já existe), false (aresta não existe)
      */
-    public static boolean arestaExiste(HashSet<Aresta> arestas, Aresta novaAresta) {
+    public static boolean arestaExiste(ArrayList<Aresta> arestas, Aresta novaAresta) {
 
-        if (arestas.contains(novaAresta))
-            return true;
+        for (Aresta a : arestas) {
+            if (a.x == novaAresta.x && a.y == novaAresta.y)
+                return true;
+        }
 
         Aresta aux = new Aresta(novaAresta.getY(),novaAresta.getX());
 
