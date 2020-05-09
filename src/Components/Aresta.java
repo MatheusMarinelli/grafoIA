@@ -5,6 +5,7 @@ import Enums.Sentido;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Aresta {
 
@@ -86,14 +87,15 @@ public class Aresta {
      */
     public static boolean arestaExiste(ArrayList<Aresta> arestas, Aresta novaAresta) {
 
-        for (Aresta a : arestas) {
+        for (Aresta a : arestas) { // valida se existe a aresta passada (ex: D-C)
             if (a.x == novaAresta.x && a.y == novaAresta.y)
                 return true;
         }
 
+        //caso não ache a aresta, tenta a achar a aresta oposta (ex: C-D)
         Aresta aux = new Aresta(novaAresta.getY(),novaAresta.getX());
 
-        for (Aresta a : arestas) {
+        for (Aresta a : arestas) { // procurando a aresta oposta (ex: C-D)
             if (a.x == aux.x && a.y == aux.y)
                 return true;
         }
@@ -110,4 +112,5 @@ public class Aresta {
         aresta.y = aux;
         return aresta;
     }
+
 }

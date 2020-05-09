@@ -16,7 +16,7 @@ public class Grafo {
     private Vertice[][] grafo;
     private final int linhas = 3;
     private int colunas;
-    private List<Integer[]> matrizAdjacencia;
+    private List<Double[]> matrizAdjacencia;
     private ArrayList<Aresta> arestasGrafo;
 
     /**
@@ -60,12 +60,20 @@ public class Grafo {
 
     /**
      * Cria a matriz de adjacência utilizando vetores
+     * e inicializa cada posição dos vetores com 0.0
+     *
      * Matriz de adjacência é uma lista de vetores
      */
     private void newMatrizAdjacencia() {
         matrizAdjacencia = new ArrayList<>();
         for (int i = (linhas*colunas)-1;i >= 1;i--){
-             matrizAdjacencia.add(new Integer[i]);
+             matrizAdjacencia.add(new Double[i]);
+        }
+
+        for (int i = 0;i<matrizAdjacencia.size();i++){
+            for (int j = 0;j<matrizAdjacencia.get(i).length;j++){
+                matrizAdjacencia.get(i)[j] = 0.0;
+            }
         }
     }
 
@@ -102,7 +110,7 @@ public class Grafo {
         for (Aresta a: arestasGrafo) { // mostrando as arestas
             System.out.println(a.getX().getId() + "//" + a.getY().getId());
         }
-        //completarMatrizAdjacencia();
+        matrizAdjacencia = inserirArestasMatrizAdjacencia();
     }
 
 
@@ -243,14 +251,25 @@ public class Grafo {
      */
     public void exibirMatrizAdjacencia() {
 //        DecimalFormat df = new DecimalFormat("#.##");
-        int t = linhas * colunas - 1;
-        for (int i = 0;i<t;i++) {
-            for (int j=0;j<t;j++) {
+        for (int i = 0;i<matrizAdjacencia.size();i++) {
+            for (int j=0;j<matrizAdjacencia.get(i).length;j++) {
 //                String peso = df.format(matrizAdjacencia[i][j]);
 //                System.out.print(peso + " ");
                 System.out.print(matrizAdjacencia.get(i)[j] + " ");
             }
             System.out.println();
         }
+    }
+
+    private List<Double[]> inserirArestasMatrizAdjacencia() {
+        for (int i = 0; i< matrizAdjacencia.size();i++) { // percorre os vetores da matriz de adjacencia
+            for (Aresta a:arestasGrafo) { // percorre as arestas do grafo isneridas pelo usuario
+                if (a.getX().getIdVertice() == i) { // se o id do vertice for igual a posição do vetor, insere o peso na matriz
+                    matrizAdjacencia.get(i)[a.getY().getIdVertice() - (a.getX().getIdVertice() + 1)] = a.getPeso().getValor();
+                }
+            }
+        }
+        //retorna a matriz de adjacencia com os pesos
+        return matrizAdjacencia;
     }
 }
