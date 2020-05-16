@@ -4,7 +4,6 @@ import Enums.Peso;
 import Enums.Sentido;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -270,6 +269,22 @@ public class Grafo {
             }
         }
         //retorna a matriz de adjacencia com os pesos
+        return matrizAdjacencia;
+    }
+
+    public Vertice[][] getGrafo() {
+        return grafo;
+    }
+
+    public int getLinhas() {
+        return linhas;
+    }
+
+    public int getColunas() {
+        return colunas;
+    }
+
+    public List<Double[]> getMatrizAdjacencia() {
         return matrizAdjacencia;
     }
 }

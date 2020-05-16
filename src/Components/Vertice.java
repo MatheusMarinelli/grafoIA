@@ -1,5 +1,7 @@
 package Components;
 
+import Enums.Cor;
+
 public class Vertice {
     private char id;
     private int linha;
@@ -7,12 +9,14 @@ public class Vertice {
     private static int indiceId = 0;
     private int idVertice;
     private static int rgVertice = 0; //identifica o vertice p/ a matriz de adjacencia
+    private Cor cor;
 
     public Vertice(int linha, int coluna) {
         id = gerarId();
         this.linha = linha;
         this.coluna = coluna;
         idVertice = gerarNumeroVertice();
+        cor = Cor.BRANCO;
     }
 
 
@@ -64,4 +68,11 @@ public class Vertice {
         return rgVertice++;
     }
 
+    public Cor getCor() {
+        return cor;
+    }
+
+    public void setCor(Cor cor) {
+        this.cor = cor;
+    }
 }

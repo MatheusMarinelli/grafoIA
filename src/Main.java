@@ -1,6 +1,4 @@
 import Components.Grafo;
-import Enums.Peso;
-
 import java.util.Scanner;
 
 /**
@@ -23,6 +21,8 @@ public class Main {
         System.out.println("Preencha as arestas do grafo...\n");
         g.preencherArestas();
 
+        System.out.println("-------------------------------------");
+        System.out.println("Matriz de Adjacência");
         g.exibirMatrizAdjacencia();
 
         sc.close();
