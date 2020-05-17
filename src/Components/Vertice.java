@@ -2,6 +2,9 @@ package Components;
 
 import Enums.Cor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vertice {
     private char id;
     private int linha;
@@ -10,6 +13,7 @@ public class Vertice {
     private int idVertice;
     private static int rgVertice = 0; //identifica o vertice p/ a matriz de adjacencia
     private Cor cor;
+    private List<Vertice> filhos;
 
     public Vertice(int linha, int coluna) {
         id = gerarId();
@@ -17,6 +21,7 @@ public class Vertice {
         this.coluna = coluna;
         idVertice = gerarNumeroVertice();
         cor = Cor.BRANCO;
+        filhos = new ArrayList<>();
     }
 
 
@@ -74,5 +79,9 @@ public class Vertice {
 
     public void setCor(Cor cor) {
         this.cor = cor;
+    }
+
+    public List<Vertice> getFilhos() {
+        return filhos;
     }
 }

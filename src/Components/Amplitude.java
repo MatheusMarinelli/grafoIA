@@ -1,10 +1,7 @@
 package Components;
 
 import Enums.Cor;
-
-import java.util.ArrayDeque;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**
@@ -14,6 +11,7 @@ public class Amplitude {
 
     private Queue<Vertice> filaVertices;
     private Grafo grafo;
+    private static Vertice verticeFila;
 
     public Amplitude(Grafo grafo, Vertice vertice){
         filaVertices = new LinkedList<>();
@@ -33,7 +31,7 @@ public class Amplitude {
             buscarColuna(aux);
             atualizaCor(aux,Cor.PRETO);
         } while (!filaVertices.isEmpty());
-        filaVertices.clear();
+        grafo.getGrafo();
     }
 
     /**
@@ -52,7 +50,7 @@ public class Amplitude {
             if (posicao < 0)
                 return;
             if (grafo.getMatrizAdjacencia().get(i)[posicao] != 0) {
-                adicionarVerticeFila(i);
+                adicionarVerticeFila(i,vertice);
             }
         }
     }
@@ -74,18 +72,19 @@ public class Amplitude {
             if (i == vertice.getIdVertice()) {
                 for (int j = 0;j<grafo.getMatrizAdjacencia().get(i).length;j++) {
                     if (grafo.getMatrizAdjacencia().get(i)[j] != 0) {
-                        adicionarVerticeFila(vertice.getIdVertice() + j + 1);
+                        adicionarVerticeFila(vertice.getIdVertice() + j + 1,vertice);
                     }
                 }
             }
         }
     }
 
-    private void adicionarVerticeFila(int idVertice) {
+    private void adicionarVerticeFila(int idVertice, Vertice pai) {
         for (int i = 0; i<grafo.getLinhas();i++) {
             for (int j=0;j<grafo.getColunas();j++) {
                 if (grafo.getGrafo()[i][j].getIdVertice() == idVertice) {
                     if (!isAtTree(grafo.getGrafo()[i][j])) {
+                        addVerticeToTree(pai,grafo.getGrafo()[i][j]);
                         atualizaCor(grafo.getGrafo()[i][j],Cor.CINZA);
                         filaVertices.add(grafo.getGrafo()[i][j]);
                         break;
@@ -118,6 +117,20 @@ public class Amplitude {
             return false;
         } else
         return true;
+    }
+
+    /**
+     * Adiciona o filho de um vértice ao vértice pai
+     * @param pai
+     * @param filho
+     */
+    private void addVerticeToTree(Vertice pai, Vertice filho) {
+        for (int i=0;i<grafo.getLinhas();i++) {
+            for (int j=0;j<grafo.getColunas();j++) {
+                if (grafo.getGrafo()[i][j].getIdVertice() == pai.getIdVertice())
+                    grafo.getGrafo()[i][j].getFilhos().add(filho);
+            }
+        }
     }
 
 
