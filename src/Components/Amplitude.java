@@ -23,12 +23,14 @@ public class Amplitude {
      * @return retorna a distância percorrida
      */
     public void buscarRota() {
-
         //percorrer a matriz de adjacencia para achar os filhos do vertice inicial
-        Vertice aux = filaVertices.remove();
-        buscarLinhaVetor(aux);
-        buscarColuna(aux);
-
+        do {
+            Vertice aux = filaVertices.remove();
+            buscarLinhaVetor(aux);
+            buscarColuna(aux);
+            atualizaCor(aux,Cor.PRETO);
+        } while (!filaVertices.isEmpty());
+        filaVertices.clear();
     }
 
     /**
@@ -36,6 +38,12 @@ public class Amplitude {
      * @param vertice
      */
     private void buscarColuna(Vertice vertice) {
+
+        //se for o primeiro vértice gerado, sai do método
+        //porque não existe uma coluna da letra A
+        if (vertice.getIdVertice() == 0)
+            return;
+
         for (int i=0;i<grafo.getMatrizAdjacencia().size();i++) { //lógica para verificar nas colunas dos vetores
             int posicao = vertice.getIdVertice()-(i+1);
             if (grafo.getMatrizAdjacencia().get(i)[posicao] != 0) {
@@ -51,6 +59,13 @@ public class Amplitude {
     private void buscarLinhaVetor(Vertice vertice) {
 //lógica para verificar o vetor relacionado ao vertice
         for (int i=0;i<grafo.getMatrizAdjacencia().size();i++) {
+
+            /*  caso seja o último vertice gerado (F numa 3x2)
+                ele sai do método, porque a respectiva linha
+                com o ID do vértice não existe */
+            if (vertice.getIdVertice() == grafo.getMatrizAdjacencia().size())
+                return;
+
             if (i == vertice.getIdVertice()) {
                 for (int j = 0;j<grafo.getMatrizAdjacencia().get(i).length;j++) {
                     if (grafo.getMatrizAdjacencia().get(i)[j] != 0) {

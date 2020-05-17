@@ -287,4 +287,14 @@ public class Grafo {
     public List<Double[]> getMatrizAdjacencia() {
         return matrizAdjacencia;
     }
+
+    public Vertice getVerticeByChar(char vertice) {
+        for (int i=0;i<getLinhas();i++) {
+            for (int j=0;j<getColunas();j++) {
+                if (grafo[i][j].getId() == vertice)
+                    return grafo[i][j];
+            }
+        }
+        return null;
+    }
 }

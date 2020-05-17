@@ -1,4 +1,7 @@
+import Components.Amplitude;
 import Components.Grafo;
+import Components.Vertice;
+
 import java.util.Scanner;
 
 /**
@@ -24,6 +27,17 @@ public class Main {
         System.out.println("-------------------------------------");
         System.out.println("Matriz de Adjacência");
         g.exibirMatrizAdjacencia();
+
+        char inicio;
+        Vertice v;
+        do {
+            System.out.print("Digite o vértice de início: ");
+            sc.nextLine();
+            inicio = sc.next().trim().charAt(0);
+            v = g.getVerticeByChar(inicio);
+        } while (v.equals(null));
+
+        new Amplitude(g,v).buscarRota();
 
         sc.close();
     }
