@@ -11,36 +11,60 @@ import java.util.Queue;
 public class Amplitude {
 
     private Queue<Vertice> filaVertices;
-    private Grafo grafo;;
+    private Grafo grafo;
 
-    public Amplitude(Grafo grafo){
+    public Amplitude(Grafo grafo, Vertice vertice){
         this.grafo = grafo;
+        filaVertices.add(vertice);
     }
 
     /**
      * Algoritmo que será rodado para encontrar a rota mais curta
-     * @param inicio vértice de início
      * @return retorna a distância percorrida
      */
-    public void buscarRota(Vertice inicio) {
-        atualizaCor(inicio,Cor.CINZA);
+    public void buscarRota() {
 
         //percorrer a matriz de adjacencia para achar os filhos do vertice inicial
-        for (int i=0;i<grafo.getMatrizAdjacencia().size();i++) {
-            if (grafo.getMatrizAdjacencia().get(i)[inicio.getIdVertice()-(i+1)] != 0)
-                adicionarVerticeFila(i);
-        }
-
-
-        //add os filhos na fila de vertice
-        //mudar a cor dos filhos
+        Vertice aux = filaVertices.remove();
+        buscarLinhaVetor(aux);
+        buscarColuna(aux);
 
     }
 
-    private void adicionarVerticeFila(int posicaoVetor) {
+    /**
+     * Busca na coluna do vértice em questão se ele faz aresta com os seus anteriores
+     * @param vertice
+     */
+    private void buscarColuna(Vertice vertice) {
+        for (int i=0;i<grafo.getMatrizAdjacencia().size();i++) { //lógica para verificar nas colunas dos vetores
+            int posicao = vertice.getIdVertice()-(i+1);
+            if (grafo.getMatrizAdjacencia().get(i)[posicao] != 0) {
+                adicionarVerticeFila(i);
+            }
+        }
+    }
+
+    /**
+     * Busca os vértices dentro do seu respectivo vetor
+     * @param vertice
+     */
+    private void buscarLinhaVetor(Vertice vertice) {
+//lógica para verificar o vetor relacionado ao vertice
+        for (int i=0;i<grafo.getMatrizAdjacencia().size();i++) {
+            if (i == vertice.getIdVertice()) {
+                for (int j = 0;j<grafo.getMatrizAdjacencia().get(i).length;j++) {
+                    if (grafo.getMatrizAdjacencia().get(i)[j] != 0) {
+                        adicionarVerticeFila(vertice.getIdVertice() + i + 1);
+                    }
+                }
+            }
+        }
+    }
+
+    private void adicionarVerticeFila(int idVertice) {
         for (int i = 0; i<grafo.getLinhas();i++) {
             for (int j=0;j<grafo.getColunas();j++) {
-                if (grafo.getGrafo()[i][j].getIdVertice() == posicaoVetor) {
+                if (grafo.getGrafo()[i][j].getIdVertice() == idVertice) {
                     if (!isAtTree(grafo.getGrafo()[i][j]))
                         atualizaCor(grafo.getGrafo()[i][j],Cor.CINZA);
                         filaVertices.add(grafo.getGrafo()[i][j]);
@@ -51,6 +75,14 @@ public class Amplitude {
     }
 
     private void atualizaCor(Vertice vertice, Cor cor){
+        for (int i=0;i<grafo.getLinhas();i++) {
+            for (int j=0;j<grafo.getColunas();j++) {
+                if (grafo.getGrafo()[i][j].equals(vertice)) {
+                    grafo.getGrafo()[i][j].setCor(cor);
+                    return;
+                }
+            }
+        }
         vertice.setCor(cor);
     }
 
