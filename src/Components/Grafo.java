@@ -106,9 +106,9 @@ public class Grafo {
         }
         sc.close();
 
-        for (Aresta a: arestasGrafo) { // mostrando as arestas
-            System.out.println(a.getX().getId() + "//" + a.getY().getId());
-        }
+//        for (Aresta a: arestasGrafo) { // mostrando as arestas
+//            System.out.println(a.getX().getId() + "//" + a.getY().getId());
+//        }
         matrizAdjacencia = inserirArestasMatrizAdjacencia();
     }
 
@@ -290,5 +290,9 @@ public class Grafo {
             }
         }
         return null;
+    }
+
+    public ArrayList<Aresta> getArestasGrafo() {
+        return arestasGrafo;
     }
 }

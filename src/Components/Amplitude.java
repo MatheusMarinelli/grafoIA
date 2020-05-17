@@ -187,5 +187,35 @@ public class Amplitude {
         }
     }
 
+    public double distanciaPercorrida() {
+        int posicaoV1 = 0, posicaoV2 = 1;
+        double total = 0;
+        Vertice v1,v2;
+
+        if (caminho.size() == 1) // caso o vertice inicial e final sejam iguais
+            return total;
+
+        while (posicaoV2 != caminho.size()) {
+            v1 = caminho.get(posicaoV1);
+            v2 = caminho.get(posicaoV2);
+            Aresta aux = new Aresta(v1,v2);
+
+            if (!aux.posicaoVerticesValido(v1,v2)) {
+                aux.setX(v2);
+                aux.setY(v1);
+            }
+
+            for (Aresta a:grafo.getArestasGrafo()) {
+                if (a.getX().equals(aux.getX()) && a.getY().equals(aux.getY())) {
+                    total += a.getPeso().getValor();
+                    posicaoV1++;
+                    posicaoV2++;
+                    break;
+                }
+            }
+        }
+        return total;
+    }
+
 
 }

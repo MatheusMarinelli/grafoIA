@@ -113,4 +113,11 @@ public class Aresta {
         return aresta;
     }
 
+    public void setX(Vertice x) {
+        this.x = x;
+    }
+
+    public void setY(Vertice y) {
+        this.y = y;
+    }
 }

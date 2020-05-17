@@ -20,10 +20,16 @@ public class Main {
             colunas = sc.nextInt();
         } while(colunas < 2 || colunas > 6); //restringindo a qtde min. e max. de colunas do grafo
 
+        System.out.println();
+        System.out.println("========================================");
+        System.out.println("GRAFO GERADO");
+        System.out.println("========================================");
         Grafo g = new Grafo(colunas); // criando o grafo
         g.mostrarGrafo();
+        System.out.println("========================================");
 
-
+        System.out.println();
+        System.out.println("========================================");
         do { // solicita o início do caminho
             System.out.print("Digite o vértice de início: ");
             inicio = sc.next().toUpperCase().charAt(0);
@@ -35,20 +41,29 @@ public class Main {
             fim = sc.next().toUpperCase().charAt(0);
             vFim = g.getVerticeByChar(fim);
         } while (vFim.equals(null));
+        System.out.println();
+        System.out.println("========================================");
 
 
         System.out.println("Preencha as arestas do grafo...\n");
         g.preencherArestas();
 
-        System.out.println("-------------------------------------");
+        System.out.println();
+        System.out.println("========================================");
         System.out.println("Matriz de Adjacência");
         g.exibirMatrizAdjacencia();
+        System.out.println("========================================");
 
-        System.out.println("-------------------------------------");
+        System.out.println();
+        System.out.println("========================================");
         System.out.println("Mostrando o caminho");
         Amplitude a = new Amplitude(g,vInicio,vFim);
         a.buscarRota();
+        System.out.print("Vértices percorridos: ");
         a.mostrarCaminho();
+        System.out.println();
+        System.out.print("Distância percorrida: " + a.distanciaPercorrida());
+
 
         sc.close();
     }
