@@ -1,6 +1,8 @@
 package Components;
 
 import Enums.Cor;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -11,12 +13,14 @@ public class Amplitude {
 
     private Queue<Vertice> filaVertices;
     private Grafo grafo;
-    private static Vertice verticeFila;
+    private ArrayList<Vertice> caminho;
 
-    public Amplitude(Grafo grafo, Vertice vertice){
+    public Amplitude(Grafo grafo, Vertice verticeInicial, Vertice verticeFinal){
         filaVertices = new LinkedList<>();
         this.grafo = grafo;
-        filaVertices.add(vertice);
+        filaVertices.add(verticeInicial);
+        caminho = new ArrayList<>();
+        caminho.add(verticeFinal);
     }
 
     /**
@@ -31,7 +35,8 @@ public class Amplitude {
             buscarColuna(aux);
             atualizaCor(aux,Cor.PRETO);
         } while (!filaVertices.isEmpty());
-        grafo.getGrafo();
+        buscarVerticesCaminho();
+
     }
 
     /**
@@ -130,6 +135,55 @@ public class Amplitude {
                 if (grafo.getGrafo()[i][j].getIdVertice() == pai.getIdVertice())
                     grafo.getGrafo()[i][j].getFilhos().add(filho);
             }
+        }
+    }
+
+    /**
+     * Buscar quais vértices fazem porte do caminho
+     */
+    private void buscarVerticesCaminho() {
+
+        int posicao = 0;
+        Vertice aux;
+        boolean isFilho = false;
+        boolean isBreak = false;
+
+        do {
+            aux = caminho.get(posicao);
+            for (int i=0;i<grafo.getLinhas();i++) {
+                if (isBreak)
+                    break;
+                for (int j=0;j<grafo.getColunas();j++) {
+                    if (checkFilho(aux,grafo.getGrafo()[i][j])) {
+                        isFilho = caminho.add(grafo.getGrafo()[i][j]);
+                        isBreak = true;
+                        break;
+                    } else {
+                        isFilho = false;
+                    }
+                }
+            }
+            posicao++;
+            isBreak = false;
+
+        } while (isFilho);
+
+    }
+
+    private boolean checkFilho(Vertice filho, Vertice pai) {
+        for (Vertice v: pai.getFilhos()) {
+            if (filho.getIdVertice() == v.getIdVertice())
+                return true;
+        }
+        return false;
+    }
+
+    public void mostrarCaminho() {
+        for (int i=caminho.size()-1;i>=0;i--) {
+            if (i==0)
+                System.out.print(caminho.get(i).getId());
+            else
+                System.out.print(caminho.get(i).getId() + "-");
         }
     }
 
