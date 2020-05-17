@@ -2,6 +2,8 @@ package Components;
 
 import Enums.Cor;
 
+import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -14,6 +16,7 @@ public class Amplitude {
     private Grafo grafo;
 
     public Amplitude(Grafo grafo, Vertice vertice){
+        filaVertices = new LinkedList<>();
         this.grafo = grafo;
         filaVertices.add(vertice);
     }
@@ -46,6 +49,8 @@ public class Amplitude {
 
         for (int i=0;i<grafo.getMatrizAdjacencia().size();i++) { //lógica para verificar nas colunas dos vetores
             int posicao = vertice.getIdVertice()-(i+1);
+            if (posicao < 0)
+                return;
             if (grafo.getMatrizAdjacencia().get(i)[posicao] != 0) {
                 adicionarVerticeFila(i);
             }
@@ -69,7 +74,7 @@ public class Amplitude {
             if (i == vertice.getIdVertice()) {
                 for (int j = 0;j<grafo.getMatrizAdjacencia().get(i).length;j++) {
                     if (grafo.getMatrizAdjacencia().get(i)[j] != 0) {
-                        adicionarVerticeFila(vertice.getIdVertice() + i + 1);
+                        adicionarVerticeFila(vertice.getIdVertice() + j + 1);
                     }
                 }
             }
@@ -80,10 +85,11 @@ public class Amplitude {
         for (int i = 0; i<grafo.getLinhas();i++) {
             for (int j=0;j<grafo.getColunas();j++) {
                 if (grafo.getGrafo()[i][j].getIdVertice() == idVertice) {
-                    if (!isAtTree(grafo.getGrafo()[i][j]))
+                    if (!isAtTree(grafo.getGrafo()[i][j])) {
                         atualizaCor(grafo.getGrafo()[i][j],Cor.CINZA);
                         filaVertices.add(grafo.getGrafo()[i][j]);
-                    break;
+                        break;
+                    }
                 }
             }
         }

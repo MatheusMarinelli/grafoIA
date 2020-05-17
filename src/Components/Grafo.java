@@ -112,12 +112,6 @@ public class Grafo {
         matrizAdjacencia = inserirArestasMatrizAdjacencia();
     }
 
-
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
     /**
      * MENU COM AS OPÇÕES DE INSERÇÃO DE ARESTA
      */

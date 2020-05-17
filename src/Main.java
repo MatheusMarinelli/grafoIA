@@ -21,6 +21,16 @@ public class Main {
         Grafo g = new Grafo(colunas); // criando o grafo
         g.mostrarGrafo();
 
+        char inicio;
+        Vertice v;
+
+        do {
+            System.out.print("Digite o vértice de início: ");
+            inicio = sc.next().toUpperCase().charAt(0);
+            v = g.getVerticeByChar(inicio);
+        } while (v.equals(null));
+
+
         System.out.println("Preencha as arestas do grafo...\n");
         g.preencherArestas();
 
@@ -28,14 +38,7 @@ public class Main {
         System.out.println("Matriz de Adjacência");
         g.exibirMatrizAdjacencia();
 
-        char inicio;
-        Vertice v;
-        do {
-            System.out.print("Digite o vértice de início: ");
-            sc.nextLine();
-            inicio = sc.next().trim().charAt(0);
-            v = g.getVerticeByChar(inicio);
-        } while (v.equals(null));
+
 
         new Amplitude(g,v).buscarRota();
 
