@@ -22,7 +22,7 @@ public class Main {
 
         System.out.println();
         System.out.println("=====================================================");
-        System.out.println("GRAFO GERADO");
+        System.out.println("\t\t\t\tGRAFO GERADO");
         System.out.println("=====================================================");
         Grafo g = new Grafo(colunas); // criando o grafo
         g.mostrarGrafo();

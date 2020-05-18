@@ -50,6 +50,7 @@ public class Grafo {
      */
     public void mostrarGrafo() {
         for (int i=0; i<linhas;i++) {
+            System.out.print("\t\t\t\t\t");
             for (int j=0;j<colunas;j++) {
                 System.out.print(grafo[i][j].getId() + " ");
             }
@@ -88,7 +89,7 @@ public class Grafo {
         for (int i=0;i<linhas;i++) {
             for (int j=0;j<colunas;j++) {
 //                clearScreen();
-                System.out.println("========================================");
+                System.out.println("=====================================================");
                 System.out.print("Aresta " + grafo[i][j].getId() + "\n");
 
                 int opcao; //opção de inserção de uma nova aresta baseado no ID da ENUM Sentido
@@ -116,7 +117,7 @@ public class Grafo {
      * MENU COM AS OPÇÕES DE INSERÇÃO DE ARESTA
      */
     private void exibirMenu() {
-        System.out.println("========================================");
+        System.out.println("=====================================================");
         System.out.println("Não inserir arestas no vértice  [0]");
         System.out.println("Vertical para cima              [1]");
         System.out.println("Vertical para baixo             [2]");
@@ -126,7 +127,7 @@ public class Grafo {
         System.out.println("Diagonal direita para baixo     [6]");
         System.out.println("Diagonal esquerda para cima     [7]");
         System.out.println("Diagonal direita para cima      [8]");
-        System.out.println("========================================");
+        System.out.println("=====================================================");
     }
 
     /**
