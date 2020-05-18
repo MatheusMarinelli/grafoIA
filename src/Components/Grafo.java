@@ -88,7 +88,7 @@ public class Grafo {
         for (int i=0;i<linhas;i++) {
             for (int j=0;j<colunas;j++) {
 //                clearScreen();
-
+                System.out.println("========================================");
                 System.out.print("Aresta " + grafo[i][j].getId() + "\n");
 
                 int opcao; //opção de inserção de uma nova aresta baseado no ID da ENUM Sentido
@@ -116,6 +116,7 @@ public class Grafo {
      * MENU COM AS OPÇÕES DE INSERÇÃO DE ARESTA
      */
     private void exibirMenu() {
+        System.out.println("========================================");
         System.out.println("Não inserir arestas no vértice  [0]");
         System.out.println("Vertical para cima              [1]");
         System.out.println("Vertical para baixo             [2]");
@@ -125,6 +126,7 @@ public class Grafo {
         System.out.println("Diagonal direita para baixo     [6]");
         System.out.println("Diagonal esquerda para cima     [7]");
         System.out.println("Diagonal direita para cima      [8]");
+        System.out.println("========================================");
     }
 
     /**
@@ -243,14 +245,31 @@ public class Grafo {
      * Exibe a matriz de adjacência
      */
     public void exibirMatrizAdjacencia() {
-//        DecimalFormat df = new DecimalFormat("#.##");
+
+        //Exibir as letras na HORIZONTAL
+        System.out.print("\t");
+        for (int i =1;i<(getLinhas()*getColunas());i++){
+            System.out.printf("\t\t%c",Vertice.getVerticeById(this,i));
+        }
+        System.out.println();
+
         for (int i = 0;i<matrizAdjacencia.size();i++) {
+            formatarMatrizAdjacencia(i);
             for (int j=0;j<matrizAdjacencia.get(i).length;j++) {
-//                String peso = df.format(matrizAdjacencia[i][j]);
-//                System.out.print(peso + " ");
-                System.out.print(matrizAdjacencia.get(i)[j] + " ");
+                System.out.printf("%.6f ",matrizAdjacencia.get(i)[j]);
             }
             System.out.println();
+        }
+    }
+
+    /**
+     * Gera o espaçamento inicial na exibição da matriz
+     * @param i posição do laço na matriz
+     */
+    private void formatarMatrizAdjacencia(int i) {
+        System.out.print(Vertice.getVerticeById(this,i));
+        for (int aux=0;aux<=i;aux++) {
+            System.out.printf("%-8s "," ");
         }
     }
 

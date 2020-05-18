@@ -84,4 +84,15 @@ public class Vertice {
     public List<Vertice> getFilhos() {
         return filhos;
     }
+
+    public static char getVerticeById(Grafo grafo, int id){
+        char c = 0;
+        for (int i=0;i<grafo.getLinhas();i++) {
+            for (int j=0;j<grafo.getColunas();j++) {
+                if (grafo.getGrafo()[i][j].getIdVertice() == id)
+                    return grafo.getGrafo()[i][j].getId();
+            }
+        }
+        return c;
+    }
 }

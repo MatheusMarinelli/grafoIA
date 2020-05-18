@@ -28,8 +28,6 @@ public class Main {
         g.mostrarGrafo();
         System.out.println("========================================");
 
-        System.out.println();
-        System.out.println("========================================");
         do { // solicita o início do caminho
             System.out.print("Digite o vértice de início: ");
             inicio = sc.next().toUpperCase().charAt(0);
@@ -41,16 +39,16 @@ public class Main {
             fim = sc.next().toUpperCase().charAt(0);
             vFim = g.getVerticeByChar(fim);
         } while (vFim.equals(null));
-        System.out.println();
         System.out.println("========================================");
 
 
+        System.out.println();
         System.out.println("Preencha as arestas do grafo...\n");
         g.preencherArestas();
 
-        System.out.println();
         System.out.println("========================================");
         System.out.println("Matriz de Adjacência");
+        System.out.println("========================================");
         g.exibirMatrizAdjacencia();
         System.out.println("========================================");
 
