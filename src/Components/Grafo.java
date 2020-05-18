@@ -249,14 +249,14 @@ public class Grafo {
         //Exibir as letras na HORIZONTAL
         System.out.print("\t");
         for (int i =1;i<(getLinhas()*getColunas());i++){
-            System.out.printf("\t\t%c",Vertice.getVerticeById(this,i));
+            System.out.printf("\t\t %c",Vertice.getVerticeById(this,i));
         }
         System.out.println();
 
         for (int i = 0;i<matrizAdjacencia.size();i++) {
             formatarMatrizAdjacencia(i);
             for (int j=0;j<matrizAdjacencia.get(i).length;j++) {
-                System.out.printf("%.6f ",matrizAdjacencia.get(i)[j]);
+                System.out.printf("%.5f ",matrizAdjacencia.get(i)[j]);
             }
             System.out.println();
         }
@@ -269,7 +269,7 @@ public class Grafo {
     private void formatarMatrizAdjacencia(int i) {
         System.out.print(Vertice.getVerticeById(this,i));
         for (int aux=0;aux<=i;aux++) {
-            System.out.printf("%-8s "," ");
+            System.out.printf("%-7s "," ");
         }
     }
 
