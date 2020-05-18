@@ -14,6 +14,7 @@ public class Amplitude {
     private Queue<Vertice> filaVertices;
     private Grafo grafo;
     private ArrayList<Vertice> caminho;
+    private Vertice vInicial, vFinal;
 
     public Amplitude(Grafo grafo, Vertice verticeInicial, Vertice verticeFinal){
         filaVertices = new LinkedList<>();
@@ -21,6 +22,8 @@ public class Amplitude {
         filaVertices.add(verticeInicial);
         caminho = new ArrayList<>();
         caminho.add(verticeFinal);
+        vInicial = verticeInicial;
+        vFinal = verticeFinal;
     }
 
     /**
@@ -215,6 +218,10 @@ public class Amplitude {
             }
         }
         return total;
+    }
+
+    public int distanciaManhattan() {
+        return Math.abs(vInicial.getLinha() - vFinal.getLinha()) + Math.abs(vInicial.getColuna() - vFinal.getColuna());
     }
 
 

@@ -275,8 +275,8 @@ public class Grafo {
     }
 
     private List<Double[]> inserirArestasMatrizAdjacencia() {
-        for (int i = 0; i< matrizAdjacencia.size();i++) { // percorre os vetores da matriz de adjacencia
-            for (Aresta a:arestasGrafo) { // percorre as arestas do grafo isneridas pelo usuario
+        for (int i = 0; i< matrizAdjacencia.size();i++) { // percorre os vetores da matriz de adjacência
+            for (Aresta a:arestasGrafo) { // percorre as arestas do grafo inseridas pelo usuário
                 if (a.getX().getIdVertice() == i) { // se o id do vertice for igual a posição do vetor, insere o peso na matriz
                     matrizAdjacencia.get(i)[a.getY().getIdVertice() - (a.getX().getIdVertice() + 1)] = a.getPeso().getValor();
                 }

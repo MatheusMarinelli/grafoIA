@@ -55,12 +55,15 @@ public class Main {
         System.out.println();
         System.out.println("=====================================================");
         System.out.println("Mostrando o caminho");
+        System.out.println("=====================================================");
         Amplitude a = new Amplitude(g,vInicio,vFim);
         a.buscarRota();
         System.out.print("Vértices percorridos: ");
         a.mostrarCaminho();
         System.out.println();
         System.out.print("Distância percorrida: " + a.distanciaPercorrida());
+        System.out.println();
+        System.out.printf("Distância Manhattan entre %c e %c: %2d",inicio,fim,a.distanciaManhattan());
 
 
         sc.close();
