@@ -15,6 +15,15 @@ public class Main {
         char inicio,fim;
         Vertice vInicio,vFim;
 
+        // exibindo o nome do algoritmo usado
+        System.out.println("******************************IMPORTANTE******************************");
+        System.out.println("**********************************************************************");
+        System.out.println("Nome do algoritmo utilizado: Busca em Largura ou Amplitude (B-F-S)");
+        System.out.println("**********************************************************************");
+
+
+        System.out.println();
+        System.out.println();
         do { // solicitando a qtde de colunas do grafo
             System.out.print("Digite a quantidade de colunas do seu Grafo [2 -- 6]: ");
             colunas = sc.nextInt();
