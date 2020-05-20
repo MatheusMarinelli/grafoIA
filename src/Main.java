@@ -64,14 +64,14 @@ public class Main {
         g.preencherArestas();
 
         System.out.println("=====================================================");
-        System.out.println("Matriz de Adjacência");
+        System.out.println("MATRIZ DE ADJACÊNCIA");
         System.out.println("=====================================================");
         g.exibirMatrizAdjacencia();
         System.out.println("=====================================================");
 
         System.out.println();
         System.out.println("=====================================================");
-        System.out.println("Mostrando o caminho");
+        System.out.println("MOSTRANDO O CAMINHO");
         System.out.println("=====================================================");
         Amplitude a = new Amplitude(g,vInicio,vFim);
         a.buscarRota();
