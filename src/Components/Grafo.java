@@ -152,9 +152,6 @@ public class Grafo {
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
                 }
-
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()] = Peso.UM.getValor();
-//                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
             }
 
             //testando a HORIZONTAL ESQUERDA
@@ -164,8 +161,6 @@ public class Grafo {
                     if (!novaAresta.posicaoVerticesValido(novaAresta.getX(),novaAresta.getY()))
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()] = Peso.UM.getValor();
-//                matrizAdjacencia[grafo[v.getLinha()][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
                     }
             }
 
@@ -177,8 +172,6 @@ public class Grafo {
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
                 }
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
-//                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
             }
 
             //testando a VERTICAL BAIXO
@@ -189,8 +182,6 @@ public class Grafo {
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
                 }
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()] = Peso.UM.getValor();
-//                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna()].getIdVertice()][v.getIdVertice()] = Peso.UM.getValor();
             }
 
             //testando a DIAGONAL BAIXO DIREITA
@@ -201,8 +192,6 @@ public class Grafo {
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
                 }
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
-//                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
 
             //testando a DIAGONAL BAIXO ESQUERDA
@@ -213,8 +202,6 @@ public class Grafo {
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
                 }
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
-//                matrizAdjacencia[grafo[v.getLinha() + 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
 
             //testando a DIAGONAL CIMA DIREITA
@@ -225,8 +212,6 @@ public class Grafo {
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
                 }
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()] = Peso.DOIS.getValor();
-//                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() + 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
 
             //testando a DIAGONAL CIMA ESQUERDA
@@ -237,8 +222,6 @@ public class Grafo {
                         novaAresta = novaAresta.inverterVertices(novaAresta);
                     arestasGrafo.add(novaAresta);
                 }
-//                matrizAdjacencia[v.getIdVertice()][grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()] = Peso.DOIS.getValor();
-//                matrizAdjacencia[grafo[v.getLinha() - 1][v.getColuna() - 1].getIdVertice()][v.getIdVertice()] = Peso.DOIS.getValor();
             }
         } catch (Exception e) {
             System.out.println("Não é possível inserir uma aresta!!!");
