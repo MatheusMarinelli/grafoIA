@@ -131,8 +131,8 @@ public class Grafo {
     }
 
     /**
-     * VALIDA SE OPÇÃO DO USUÁRIO É VÁLIDA
-     * PARA INSERIR UM NOVA ARESTA
+     * VALIDA SE A OPÇÃO DO USUÁRIO É VÁLIDA
+     * PARA INSERIR UMA NOVA ARESTA
      *
      * @param v vértice em que o usuário está
      * @param sentido sentido de inserção da aresta
@@ -274,6 +274,10 @@ public class Grafo {
         }
     }
 
+    /**
+     * Insere os pesos das arestas na matriz de adjacência
+     * @return retorna a matriz de adjacência preenchida
+     */
     private List<Double[]> inserirArestasMatrizAdjacencia() {
         for (int i = 0; i< matrizAdjacencia.size();i++) { // percorre os vetores da matriz de adjacência
             for (Aresta a:arestasGrafo) { // percorre as arestas do grafo inseridas pelo usuário

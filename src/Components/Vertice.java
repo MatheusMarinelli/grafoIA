@@ -11,7 +11,7 @@ public class Vertice {
     private int coluna;
     private static int indiceId = 0;
     private int idVertice;
-    private static int rgVertice = 0; //identifica o vertice p/ a matriz de adjacencia
+    private static int rgVertice = 0; //identifica o vértice para a matriz de adjacência
     private Cor cor;
     private List<Vertice> filhos;
 
@@ -85,6 +85,12 @@ public class Vertice {
         return filhos;
     }
 
+    /**
+     * Retorna um vértice de acordo com o ID passado
+     * @param grafo grafo gerado
+     * @param id id do vértice (A=0, B=1 ...)
+     * @return retorna a letra do vértice
+     */
     public static char getVerticeById(Grafo grafo, int id){
         char c = 0;
         for (int i=0;i<grafo.getLinhas();i++) {

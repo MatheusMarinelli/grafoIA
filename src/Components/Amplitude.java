@@ -27,8 +27,9 @@ public class Amplitude {
     }
 
     /**
-     * Algoritmo que será rodado para encontrar a rota mais curta
-     * @return retorna a distância percorrida
+     * Primeiro monta a árvore mínima e
+     * em seguida busca os vértices que
+     * pertencem ao caminho
      */
     public void buscarRota() {
         //percorrer a matriz de adjacencia para achar os filhos do vertice inicial
@@ -43,8 +44,8 @@ public class Amplitude {
     }
 
     /**
-     * Busca na coluna do vértice em questão se ele faz aresta com os seus anteriores
-     * @param vertice
+     * Busca na coluna do vértice em questão se ele faz aresta com os vértices anteriores a ele
+     * @param vertice vértice retirado da fila
      */
     private void buscarColuna(Vertice vertice) {
 
@@ -64,8 +65,8 @@ public class Amplitude {
     }
 
     /**
-     * Busca os vértices dentro do seu respectivo vetor
-     * @param vertice
+     * Busca no vetor do vértice se ele faz aresta com outros vértices
+     * @param vertice vértice retirado da fila
      */
     private void buscarLinhaVetor(Vertice vertice) {
 //lógica para verificar o vetor relacionado ao vertice
@@ -102,6 +103,11 @@ public class Amplitude {
         }
     }
 
+    /**
+     * Atualiza a cor do vértice
+     * @param vertice vértice que terá a cor trocada
+     * @param cor Cor (BRANCO, CINZA, PRETO)
+     */
     private void atualizaCor(Vertice vertice, Cor cor){
         for (int i=0;i<grafo.getLinhas();i++) {
             for (int j=0;j<grafo.getColunas();j++) {
@@ -118,7 +124,7 @@ public class Amplitude {
     /**
      * Verifica se o vértice já está na árvore
      * @param vertice
-     * @return
+     * @return retorna true se já estiver na árvore, false se não estiver na árvore
      */
     private boolean isAtTree(Vertice vertice) {
         if (vertice.getCor().equals(Cor.BRANCO)) {
@@ -181,6 +187,9 @@ public class Amplitude {
         return false;
     }
 
+    /**
+     * Mostra os vértices pertencentes ao caminho
+     */
     public void mostrarCaminho() {
         for (int i=caminho.size()-1;i>=0;i--) {
             if (i==0)
@@ -190,6 +199,10 @@ public class Amplitude {
         }
     }
 
+    /**
+     * Calculando a distância percorrida
+     * @return retorna a distância total percorrida
+     */
     public double distanciaPercorrida() {
         int posicaoV1 = 0, posicaoV2 = 1;
         double total = 0;
@@ -220,6 +233,10 @@ public class Amplitude {
         return total;
     }
 
+    /**
+     * Calcular a distância Manhattan
+     * @return retorna o valor da distância Manhattan
+     */
     public int distanciaManhattan() {
         return Math.abs(vInicial.getLinha() - vFinal.getLinha()) + Math.abs(vInicial.getColuna() - vFinal.getColuna());
     }
