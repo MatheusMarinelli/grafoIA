@@ -32,7 +32,7 @@ public class Amplitude {
      * pertencem ao caminho
      */
     public void buscarRota() {
-        //percorrer a matriz de adjacencia para achar os filhos do vertice inicial
+        //percorrer a matriz de adjacência para achar os filhos do vértice inicial
         do {
             Vertice aux = filaVertices.remove();
             buscarLinhaVetor(aux);
@@ -69,7 +69,7 @@ public class Amplitude {
      * @param vertice vértice retirado da fila
      */
     private void buscarLinhaVetor(Vertice vertice) {
-//lógica para verificar o vetor relacionado ao vertice
+        //lógica para verificar o vetor relacionado ao vértice
         for (int i=0;i<grafo.getMatrizAdjacencia().size();i++) {
 
             /*  caso seja o último vertice gerado (F numa 3x2)
@@ -208,7 +208,7 @@ public class Amplitude {
         double total = 0;
         Vertice v1,v2;
 
-        if (caminho.size() == 1) // caso o vertice inicial e final sejam iguais
+        if (caminho.size() == 1) // caso o vértice inicial e final sejam iguais
             return total;
 
         while (posicaoV2 != caminho.size()) {
