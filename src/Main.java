@@ -41,13 +41,21 @@ public class Main {
             System.out.print("Digite o vértice de início: ");
             inicio = sc.next().toUpperCase().charAt(0);
             vInicio = g.getVerticeByChar(inicio);
-        } while (vInicio.equals(null));
+
+            if (vInicio == null)
+                System.out.println("Vértice inválido!!!");
+
+        } while (vInicio == null);
 
         do { // solicita o final do caminho
             System.out.print("Digite o vértice final: ");
             fim = sc.next().toUpperCase().charAt(0);
             vFim = g.getVerticeByChar(fim);
-        } while (vFim.equals(null));
+
+            if (vFim == null)
+                System.out.println("Vértice inválido!!!");
+
+        } while (vFim == null);
         System.out.println("=====================================================");
 
 
