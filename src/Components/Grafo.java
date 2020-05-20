@@ -98,6 +98,9 @@ public class Grafo {
                     System.out.print("Digite uma das opções acima: ");
                     opcao = sc.nextInt();
 
+                    if (opcao < 0 || opcao > 8)
+                        System.out.println("Opção inválida!!!");
+
                     if (opcao != 0) {
                         //VERIFICANDO SE É POSSÍVEL INSERIR A ARESTA
                         checkOption(grafo[i][j],new Aresta().getSentido(opcao));
