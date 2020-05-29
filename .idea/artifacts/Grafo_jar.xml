@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Grafo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Grafo_jar</output-path>
+    <root id="archive" name="Grafo.jar">
+      <element id="module-output" name="Grafo" />
+    </root>
+  </artifact>
+</component>

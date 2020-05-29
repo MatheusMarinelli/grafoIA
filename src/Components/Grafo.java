@@ -17,6 +17,7 @@ public class Grafo {
     private int colunas;
     private List<Double[]> matrizAdjacencia;
     private ArrayList<Aresta> arestasGrafo;
+    private HUD hud = new HUD();
 
     /**
      * CRIA UM NOVO GRAFO
@@ -49,6 +50,11 @@ public class Grafo {
      * EXIBE O GRAFO
      */
     public void mostrarGrafo() {
+        System.out.println();
+        System.out.println("=====================================================");
+        System.out.println("\t\t\t\tGRAFO GERADO");
+        System.out.println("=====================================================");
+
         for (int i=0; i<linhas;i++) {
             System.out.print("\t\t\t\t\t");
             for (int j=0;j<colunas;j++) {
@@ -56,6 +62,7 @@ public class Grafo {
             }
             System.out.println();
         }
+        System.out.println("=====================================================");
     }
 
     /**
@@ -82,7 +89,7 @@ public class Grafo {
      * DENTRO DO GRAFO
      */
     public void preencherArestas() {
-        exibirMenu();
+        hud.exibirMenu();
         Scanner sc = new Scanner(System.in);
 
         //PERCORRENDO TODOS OS VÉRTICES DO GRAFO
@@ -116,22 +123,7 @@ public class Grafo {
         matrizAdjacencia = inserirArestasMatrizAdjacencia();
     }
 
-    /**
-     * MENU COM AS OPÇÕES DE INSERÇÃO DE ARESTA
-     */
-    private void exibirMenu() {
-        System.out.println("=====================================================");
-        System.out.println("Não inserir arestas no vértice  [0]");
-        System.out.println("Vertical para cima              [1]");
-        System.out.println("Vertical para baixo             [2]");
-        System.out.println("Horizontal para a direita       [3]");
-        System.out.println("Horizontal para a esquerda      [4]");
-        System.out.println("Diagonal esquerda para baixo    [5]");
-        System.out.println("Diagonal direita para baixo     [6]");
-        System.out.println("Diagonal esquerda para cima     [7]");
-        System.out.println("Diagonal direita para cima      [8]");
-        System.out.println("=====================================================");
-    }
+
 
     /**
      * VALIDA SE A OPÇÃO DO USUÁRIO É VÁLIDA
@@ -232,11 +224,13 @@ public class Grafo {
      * Exibe a matriz de adjacência
      */
     public void exibirMatrizAdjacencia() {
-
+        System.out.println("=====================================================");
+        System.out.println("MATRIZ DE ADJACÊNCIA");
+        System.out.println("=====================================================");
         //Exibir as letras na HORIZONTAL
-        System.out.print("\t");
+        System.out.printf("\t %-4s"," ");
         for (int i =1;i<(getLinhas()*getColunas());i++){
-            System.out.printf("\t\t %c",Vertice.getVerticeById(this,i));
+            System.out.printf("%c%-7s",Vertice.getVerticeById(this,i)," ");
         }
         System.out.println();
 
@@ -247,6 +241,7 @@ public class Grafo {
             }
             System.out.println();
         }
+        System.out.println("=====================================================");
     }
 
     /**
