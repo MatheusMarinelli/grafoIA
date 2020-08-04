@@ -24,8 +24,13 @@ public class Main {
             colunas = sc.nextInt();
         } while(colunas < 2 || colunas > 6); //restringindo a qtde min. e max. de colunas do grafo
 
-        Grafo g = new Grafo(colunas); // criando o grafo
+        Grafo g = new Grafo(colunas,sc); // criando o grafo
         g.mostrarGrafo();
+
+        System.out.println();
+        System.out.println("Preencha as arestas do grafo...\n");
+        g.preencherArestas();
+        //////////////////////////////////////////////
 
         do { // solicita o início do caminho
             System.out.print("Digite o vértice de início: ");
@@ -48,10 +53,7 @@ public class Main {
         } while (vFim == null);
         System.out.println("=====================================================");
 
-
-        System.out.println();
-        System.out.println("Preencha as arestas do grafo...\n");
-        g.preencherArestas();
+        ///////////////////////////////////////////////
 
         g.exibirMatrizAdjacencia();
         hud.mostrarCaminho();

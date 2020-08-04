@@ -18,15 +18,17 @@ public class Grafo {
     private List<Double[]> matrizAdjacencia;
     private ArrayList<Aresta> arestasGrafo;
     private HUD hud = new HUD();
+    private Scanner sc;
 
     /**
      * CRIA UM NOVO GRAFO
      * @param colunas quantidade de colunas (2 a 6)
      */
-    public Grafo(int colunas) {
+    public Grafo(int colunas, Scanner sc) {
         this.colunas = colunas;
         grafo = criarGrafo();
         arestasGrafo = new ArrayList<>();
+        this.sc = sc;
         newMatrizAdjacencia();
     }
 
@@ -90,7 +92,6 @@ public class Grafo {
      */
     public void preencherArestas() {
         hud.exibirMenu();
-        Scanner sc = new Scanner(System.in);
 
         //PERCORRENDO TODOS OS VÉRTICES DO GRAFO
         for (int i=0;i<linhas;i++) {
@@ -115,11 +116,7 @@ public class Grafo {
                 } while (opcao != 0); // SE 0 VAI PARA O PRÓXIMO VÉRTICE
             }
         }
-        sc.close();
 
-//        for (Aresta a: arestasGrafo) { // mostrando as arestas
-//            System.out.println(a.getX().getId() + "//" + a.getY().getId());
-//        }
         matrizAdjacencia = inserirArestasMatrizAdjacencia();
     }
 
