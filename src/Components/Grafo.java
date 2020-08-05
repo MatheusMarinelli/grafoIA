@@ -18,17 +18,15 @@ public class Grafo {
     private List<Double[]> matrizAdjacencia;
     private ArrayList<Aresta> arestasGrafo;
     private HUD hud = new HUD();
-    private Scanner sc;
+    private static Scanner sc;
 
     /**
      * CRIA UM NOVO GRAFO
-     * @param colunas quantidade de colunas (2 a 6)
      */
-    public Grafo(int colunas, Scanner sc) {
-        this.colunas = colunas;
+    public Grafo() {
+        quantidadeDeColunas();
         grafo = criarGrafo();
         arestasGrafo = new ArrayList<>();
-        this.sc = sc;
         newMatrizAdjacencia();
     }
 
@@ -60,7 +58,7 @@ public class Grafo {
         for (int i=0; i<linhas;i++) {
             System.out.print("\t\t\t\t\t");
             for (int j=0;j<colunas;j++) {
-                System.out.print(grafo[i][j].getId() + " ");
+                System.out.print(grafo[i][j].getVertice() + " ");
             }
             System.out.println();
         }
@@ -91,6 +89,7 @@ public class Grafo {
      * DENTRO DO GRAFO
      */
     public void preencherArestas() {
+
         hud.exibirMenu();
 
         //PERCORRENDO TODOS OS VÉRTICES DO GRAFO
@@ -98,7 +97,7 @@ public class Grafo {
             for (int j=0;j<colunas;j++) {
 //                clearScreen();
                 System.out.println("=====================================================");
-                System.out.print("Aresta " + grafo[i][j].getId() + "\n");
+                System.out.print("Vértice " + grafo[i][j].getVertice() + "\n");
 
                 int opcao; //opção de inserção de uma nova aresta baseado no ID da ENUM Sentido
                 do { // solicitando uma ou mais direções para criação de arestas
@@ -284,17 +283,51 @@ public class Grafo {
         return matrizAdjacencia;
     }
 
-    public Vertice getVerticeByChar(char vertice) {
+    private Vertice getVerticeByChar(char vertice) {
         for (int i=0;i<getLinhas();i++) {
             for (int j=0;j<getColunas();j++) {
-                if (grafo[i][j].getId() == vertice)
+                if (grafo[i][j].getVertice() == vertice)
                     return grafo[i][j];
             }
         }
+        System.out.println("Vértice inválido!!!");
         return null;
     }
 
     public ArrayList<Aresta> getArestasGrafo() {
         return arestasGrafo;
     }
+
+    public static void setScanner(Scanner sc) {
+        Grafo.sc = sc;
+    }
+
+    private void quantidadeDeColunas() {
+        do {
+            System.out.print("Digite a quantidade de colunas do seu Grafo [2 -- 6]: ");
+            colunas = sc.nextInt();
+        } while(colunas < 2 || colunas > 6);
+    }
+
+    public Vertice getVerticeInicial() {
+        System.out.println("=====================================================\n");
+        Vertice vInicio;
+        do { // solicita o início do caminho
+            System.out.print("Digite o vértice de início: ");
+            vInicio = getVerticeByChar(sc.next().toUpperCase().charAt(0));
+        } while (vInicio == null);
+
+        return vInicio;
+    }
+
+    public Vertice getVerticeFinal() {
+        Vertice vFim;
+        do { // solicita o final do caminho
+            System.out.print("Digite o vértice final: ");
+            vFim = getVerticeByChar(sc.next().toUpperCase().charAt(0));
+        } while (vFim == null);
+        System.out.println("\n======================================================");
+        return vFim;
+    }
+
 }

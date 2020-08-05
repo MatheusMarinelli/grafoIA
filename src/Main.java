@@ -12,60 +12,28 @@ public class Main {
     public static void main(String[] args) {
         HUD hud = new HUD();
         Scanner sc = new Scanner(System.in); // objeto de leitura
-        int colunas;
-        char inicio,fim;
         Vertice vInicio,vFim;
+        Grafo grafo;
 
-
+        Grafo.setScanner(sc);
         hud.nomeAlgotirmo();
+        grafo = new Grafo();
+        grafo.mostrarGrafo();
+        grafo.preencherArestas();
 
-        do { // solicitando a qtde de colunas do grafo
-            System.out.print("Digite a quantidade de colunas do seu Grafo [2 -- 6]: ");
-            colunas = sc.nextInt();
-        } while(colunas < 2 || colunas > 6); //restringindo a qtde min. e max. de colunas do grafo
+        vInicio = grafo.getVerticeInicial();
+        vFim = grafo.getVerticeFinal();
 
-        Grafo g = new Grafo(colunas,sc); // criando o grafo
-        g.mostrarGrafo();
-
-        System.out.println();
-        System.out.println("Preencha as arestas do grafo...\n");
-        g.preencherArestas();
-        //////////////////////////////////////////////
-
-        do { // solicita o início do caminho
-            System.out.print("Digite o vértice de início: ");
-            inicio = sc.next().toUpperCase().charAt(0);
-            vInicio = g.getVerticeByChar(inicio);
-
-            if (vInicio == null)
-                System.out.println("Vértice inválido!!!");
-
-        } while (vInicio == null);
-
-        do { // solicita o final do caminho
-            System.out.print("Digite o vértice final: ");
-            fim = sc.next().toUpperCase().charAt(0);
-            vFim = g.getVerticeByChar(fim);
-
-            if (vFim == null)
-                System.out.println("Vértice inválido!!!");
-
-        } while (vFim == null);
-        System.out.println("=====================================================");
-
-        ///////////////////////////////////////////////
-
-        g.exibirMatrizAdjacencia();
+        grafo.exibirMatrizAdjacencia();
         hud.mostrarCaminho();
 
-        Amplitude a = new Amplitude(g,vInicio,vFim);
-        a.buscarRota();
-        System.out.print("Vértices percorridos: ");
-        a.mostrarCaminho();
+        Amplitude amplitude = new Amplitude(grafo,vInicio,vFim);
+        amplitude.buscarRota();
+        amplitude.mostrarCaminho();
         System.out.println();
-        System.out.print("Distância percorrida: " + a.distanciaPercorrida());
+        System.out.print("Distância percorrida: " + amplitude.distanciaPercorrida());
         System.out.println();
-        System.out.printf("Distância Manhattan entre %c e %c: %2d",inicio,fim,a.distanciaManhattan());
+        System.out.printf("Distância Manhattan entre %c e %c: %2d",vInicio.getVertice(),vFim.getVertice(),amplitude.distanciaManhattan());
 
         sc.close();
     }

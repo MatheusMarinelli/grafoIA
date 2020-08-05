@@ -191,11 +191,12 @@ public class Amplitude {
      * Mostra os vértices pertencentes ao caminho
      */
     public void mostrarCaminho() {
+        System.out.print("Vértices percorridos: ");
         for (int i=caminho.size()-1;i>=0;i--) {
             if (i==0)
-                System.out.print(caminho.get(i).getId());
+                System.out.print(caminho.get(i).getVertice());
             else
-                System.out.print(caminho.get(i).getId() + "-");
+                System.out.print(caminho.get(i).getVertice() + "-");
         }
     }
 

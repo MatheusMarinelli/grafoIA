@@ -16,6 +16,7 @@ public class HUD {
      * MENU COM AS OPÇÕES DE INSERÇÃO DE ARESTA
      */
     public void exibirMenu() {
+        System.out.println("\nPreencha as arestas do grafo...\n");
         System.out.println("=====================================================");
         System.out.println("Não inserir arestas no vértice  [0]");
         System.out.println("Vertical para cima              [1]");
