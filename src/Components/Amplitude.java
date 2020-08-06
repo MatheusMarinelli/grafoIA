@@ -26,6 +26,18 @@ public class Amplitude {
         vFinal = verticeFinal;
     }
 
+    public Vertice getVerticeInicial() {
+        return vInicial;
+    }
+
+    public Vertice getVerticeFinal() {
+        return vFinal;
+    }
+
+    public ArrayList<Vertice> getCaminhoPercorrido() {
+        return caminho;
+    }
+
     /**
      * Primeiro monta a árvore mínima e
      * em seguida busca os vértices que
@@ -185,19 +197,6 @@ public class Amplitude {
                 return true;
         }
         return false;
-    }
-
-    /**
-     * Mostra os vértices pertencentes ao caminho
-     */
-    public void mostrarCaminho() {
-        System.out.print("Vértices percorridos: ");
-        for (int i=caminho.size()-1;i>=0;i--) {
-            if (i==0)
-                System.out.print(caminho.get(i).getVertice());
-            else
-                System.out.print(caminho.get(i).getVertice() + "-");
-        }
     }
 
     /**

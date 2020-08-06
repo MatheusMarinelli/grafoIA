@@ -1,5 +1,7 @@
 package Components;
 
+import java.util.List;
+
 public class HUD {
 
     public void nomeAlgotirmo() {
@@ -40,6 +42,27 @@ public class HUD {
         System.out.println("=====================================================");
     }
 
+    public void exibirVerticesPercorridos(List<Vertice> caminho) {
+        System.out.print("Vértices percorridos: ");
+        for (int i=caminho.size()-1;i>=0;i--) {
+            if (i==0)
+                System.out.print(caminho.get(i).getVertice());
+            else
+                System.out.print(caminho.get(i).getVertice() + "-");
+        }
+    }
 
+    public void exibirDistanciaPercorrida(Double distanciaPercorrida) {
+        System.out.print("\nDistância percorrida: " + distanciaPercorrida);
+    }
+
+    /**
+     * Exibe a distância Manhattan entreo vértice inicial e o vértice final
+     *
+     */
+    public void exibirDistanciaManhattan(Vertice inicio, Vertice fim, int distanciaManhattan) {
+        System.out.printf("\nDistância Manhattan entre %c e %c: %2d",
+                inicio.getVertice(), fim.getVertice(), distanciaManhattan);
+    }
 
 }

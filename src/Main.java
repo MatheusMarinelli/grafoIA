@@ -29,11 +29,9 @@ public class Main {
 
         Amplitude amplitude = new Amplitude(grafo,vInicio,vFim);
         amplitude.buscarRota();
-        amplitude.mostrarCaminho();
-        System.out.println();
-        System.out.print("Distância percorrida: " + amplitude.distanciaPercorrida());
-        System.out.println();
-        System.out.printf("Distância Manhattan entre %c e %c: %2d",vInicio.getVertice(),vFim.getVertice(),amplitude.distanciaManhattan());
+        hud.exibirVerticesPercorridos(amplitude.getCaminhoPercorrido());
+        hud.exibirDistanciaPercorrida(amplitude.distanciaPercorrida());
+        hud.exibirDistanciaManhattan(amplitude.getVerticeInicial(),amplitude.getVerticeFinal(),amplitude.distanciaManhattan());
 
         sc.close();
     }
